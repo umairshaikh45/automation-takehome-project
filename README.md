@@ -9,9 +9,9 @@ Project for candidates to complete as a hiring assessment.
 
 ## Project Requirements
 
-The objective is to build an automation application that meets the following requirements:
+The objective is to build an automation application, meaning a program that performs a manual workflow in a repeatable manner. It must meet the following requirements:
 
-1. Use Node.js, Typescript, and the [Playwright](https://playwright.dev/) library.
+1. Use Node.js, Typescript, and the [Playwright](https://playwright.dev/) library. **IMPORTANT: Playwright should be used to facilitate the web automation, not for testing purposes.**
 2. Navigate to https://amazon.com
 3. Finds the three lowest prices for any given search term
 4. Write these products' to a CSV locally where each row contains product, price, search term, and link to the product's page.
