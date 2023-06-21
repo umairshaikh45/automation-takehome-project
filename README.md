@@ -23,3 +23,24 @@ The objective is to build an automation application, meaning a program that perf
 ### Extra Credit
 
 1. Introduce a set of tests around the project
+
+### Run Project
+To run the project enter the following command this will compile and run the project.
+
+ **npm run start **
+
+## Making request
+
+Once the service is up and running on the port 3000(Default) then you can make request to the service. In order to make a POST request you need to goto the url.
+`http://127.0.0.1:3000/findproduct` 
+
+
+Pass the follwing api parameter in body json
+```sh
+{
+    "url":"https://www.amazon.com",
+    "searchTerm":"laptop", 
+    "maxProducts":"3"
+}
+```
+In this way it will be reusable.

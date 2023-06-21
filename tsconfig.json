@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+      "target": "es5",
+      "module": "commonjs",
+      "removeComments": true,
+      "outDir": "dist",
+      "strict": true,
+      "sourceMap": true,
+      "strictPropertyInitialization": false,
+      "resolveJsonModule" : true,
+      "importHelpers": true,
+      "incremental": true,
+      "composite": true,
+      "allowJs": true,
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": [
+        "node_modules"
+      ],
+      "types": [
+        "node",
+      ]
+}
