@@ -1,4 +1,4 @@
-import * as express from 'express';
+import express from 'express';
 import { createObjectCsvWriter } from 'csv-writer';
 import {
     chromium,
@@ -97,50 +97,47 @@ class EcommerceAutomation {
 
 function startServer(): express.Application {
   const app = express();
-
   const port = 3000;
   app.listen(port, () => {
-      console.log(`Server is running on port ${port}`);
+      console.log(`Server is running on port ${port} and can accept request.`);
   });
 
+  app.use(express.json());
+  app.post('/findProduct', async (req:any, res:any) => {
+      const ecommerce = new EcommerceAutomation();
+      await ecommerce.initialize();
+      try {
+          const {
+              searchTerm,
+              maxProducts,
+              url
+          } = req.body;
+          if (searchTerm && maxProducts && url) {
+              await ecommerce.navigateTo(url,searchTerm);
+              // Extract product information
+              const products = await ecommerce.extractProductInformation(maxProducts);
+              await ecommerce.writeProductsToCSV(products, searchTerm);
+              await ecommerce.close();
+              res.status(200).json({
+                  success: true,
+                  message: 'Completed successfully.',
+              });
+          } else {
+              return res.status(400).json({
+                  success: false,
+                  message: 'One of the required parameters is missing.',
+              });
+          }
+      } catch (error) {
+          console.error('Error:', error);
+          res.status(500).json({
+              success: false,
+              message: 'An error occurred during the Process.',
+          });
+      }
+  });
   return app;
 }
-
-const app = startServer();
-app.use(express.json());
-
-app.post('/findProduct', async (req, res) => {
-    const ecommerce = new EcommerceAutomation();
-    await ecommerce.initialize();
-    try {
-        const {
-            searchTerm,
-            maxProducts,
-            url
-        } = req.body;
-        if (searchTerm && maxProducts && url) {
-            await ecommerce.navigateTo(url,searchTerm);
-            // Extract product information
-            const products = await ecommerce.extractProductInformation(maxProducts);
-            await ecommerce.writeProductsToCSV(products, searchTerm);
-            await ecommerce.close();
-            res.status(200).json({
-                success: true,
-                message: 'Completed successfully.',
-            });
-        } else {
-            return res.status(400).json({
-                success: false,
-                message: 'One of the required parameters is missing.',
-            });
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({
-            success: false,
-            message: 'An error occurred during the Process.',
-        });
-    }
-});
+startServer();
 
 export default startServer;

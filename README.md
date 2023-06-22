@@ -27,7 +27,7 @@ The objective is to build an automation application, meaning a program that perf
 ### Run Project
 To run the project enter the following command this will compile and run the project.
 
- **npm run start **
+ **npm run start**
 
 ## Making request
 
@@ -39,7 +39,7 @@ Pass the follwing api parameter in body json
 ```sh
 {
     "url":"https://www.amazon.com",
-    "searchTerm":"laptop", 
+    "searchTerm":"dell laptop", 
     "maxProducts":"3"
 }
 ```
